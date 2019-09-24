@@ -1,65 +1,51 @@
-#include<stdio.h>
+	#include"header.h"
 
-int sumDigits();
-void printIfFound(int array[], int size, int value);
-int linearSearch(int array[], int size, int value);
-
-int main()
-{
-	int array[10];
-	int i;
-	int sum = sumDigits();
-	int searchIndex;
-	for(i = 0; i < 10; ++i)
-		array[i] = i;
-	printIfFound(array, 10, 5);
-	searchIndex = linearSearch(array, 10, 5);
-	printf("%d\n", searchIndex);
-	printf("%d\n", sum);
-
-	return 0;
-}
-
-int sumDigits()
-{
-	int sum = 0;
-	int digit;
-	for(digit = 0; digit <= 9; ++digit)
+	int main()
 	{
-		sum += digit;
+		simpleUnion();
+		//notSoSimpleUnion();
+		
+		return 0;
 	}
-	return sum;
-}
 
-void printIfFound(int array[], int size, int value)
-{
-	int found = -1;
-	int i;
-	for(i = 0; i < size; ++i)
+	void simpleUnion()
 	{
-		if(array[i] == value)
-		{
-			found = i;
-			break;
-		}
+		union A unionA;
+		unionA.a = 'a';
+		printf("a = %c\n", unionA.a);
+		unionA.b = 'b';
+		printf("b = %c\n", unionA.b);
+		unionA.c = 'c';
+		printf("c = %c\n", unionA.c);
+		unionA.d = 'd';
+		printf("d = %c\n", unionA.d);
+		printf("\n");
+		printf("a = %c\n", unionA.a);
+		printf("b = %c\n", unionA.b);
+		printf("c = %c\n", unionA.c);
+		printf("d = %c\n", unionA.d);
+		printf("The size of 4 char union is %d bytes.\n", sizeof unionA);
 	}
-	if(found != -1)
-		printf("The value %d was found in index %d\n", value, found);
-	else
-		printf("The value %d was not found.\n", value);
-}
 
-int linearSearch(int array[], int size, int value)
-{
-	int result;
-	int i;
-	for(i = 0; i < size; ++i)
+	void notSoSimpleUnion()
 	{
-		if(array[i] == value)
-		{
-			result = i;
-			break;
-		}
+		int i;
+		union B unionB;
+		unionB.symbol = 's';
+		printf("symbol = %c\n", unionB.symbol);
+		unionB.number = 5;
+		printf("number = %d\n", unionB.number);
+		for(i = 0; i < 3; ++i)
+			unionB.numbers[i] = (float)i+1;
+		for(i = 0; i < 3; ++i)
+			printf("numbers[%d] = %.2f, ", i, unionB.numbers[i]);
+
+		printf("\n");
+		printf("\n");
+		printf("symbol = %c\n", unionB.symbol);
+		printf("number = %d\n", unionB.number);
+		for(i = 0; i < 3; ++i)
+			printf("numbers[%d] = %.2f, ", i, unionB.numbers[i]);
+		printf("\n");
+		printf("The size of union of 1 char, 1 int and array of 3 floats is %d bytes.\n", sizeof unionB);
 	}
-	return result;
-}
